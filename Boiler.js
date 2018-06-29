@@ -33,9 +33,9 @@ class App extends React.Component {
 
 export default createBottomTabNavigator(
   {
+    Map: Map,
     Report: Report,
     Navigation: Navigation,
-    Map: Map,
     cityPoints: cityPoints,
     InsertRamp: InsertRamp
   },
@@ -61,7 +61,7 @@ export default createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'blue',
+      activeTintColor: '#004d99',
       inactiveTintColor: 'gray',
       visible: false
     },

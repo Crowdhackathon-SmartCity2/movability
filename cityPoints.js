@@ -48,7 +48,7 @@ export default class cityPoints extends React.Component {
         <View style={styles.container1}>
         <View style={{ alignItems: 'center' }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 23, paddingBottom: 15, color: 'red',
+            fontWeight: 'bold', fontSize: 23, paddingBottom: 15, color: 'white',
           }}>Κατάταξη Πόλεων</Text></View>
 
         <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
@@ -61,9 +61,9 @@ export default class cityPoints extends React.Component {
 
   const styles = StyleSheet.create(
     {
-      container1: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#f1f8ff' },
-    text: { margin: 6 },
+      container1: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#004d99' },
+    head: { height: 40, backgroundColor: 'lightgrey' },
+    text: { margin: 6, color: 'white' },
       container: {
         position: "absolute",
         top: 0,

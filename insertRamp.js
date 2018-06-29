@@ -26,6 +26,10 @@ export default class InsertRamp extends React.Component {
         latitude: 37.34297952169793,
         longitude: -122.00497459620237,
       },
+      location: {
+        latitude: 0,
+        longitude: 0
+      },
       language: '',
       problem: '',
       perigrafi: '',
@@ -36,8 +40,20 @@ export default class InsertRamp extends React.Component {
       }
 
   }
+ 
 
-
+  componentDidMount() {
+    this.watchId = navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          location: position.coords
+        });
+        console.log("lat + " + JSON.stringify(position.coords))
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true},
+    );
+  }
 
   render() {
 
@@ -51,32 +67,45 @@ export default class InsertRamp extends React.Component {
       longitudeDelta: 0.0421,
     }
 
+    latitude = JSON.stringify(this.state.location.latitude);
+    longitude = JSON.stringify(this.state.location.longitude);
+    
 
     var request = new XMLHttpRequest();
     return (
-      <ScrollView contentContainerStyle={{ alignItems: 'center', flexGrow: 1, flex: 1, paddingTop: 10 }} >
+      <ScrollView  contentContainerStyle={{ alignItems: 'center', flex: 1, paddingTop: 10, backgroundColor: '#004d99', width: '100%' }}>
         <Text style={{
-          fontWeight: 'bold', fontSize: 23, paddingBottom: 15, color: 'red',
-        }}>Εισαγωγή Νέας Ράμπας</Text>
-        <MapView initialRegion={initialRegion} style={{ width: '100%', height: '30%', paddingBottom: 10 }} onPress={e => this.setState({ markers: e.nativeEvent.coordinate })}>
-          {
-            <MapView.Marker
-              key="1"
-              coordinate={{
-                latitude: parseFloat(this.state.markers["latitude"]),
-                longitude: parseFloat(this.state.markers["longitude"])
-              }}
-              title={"Ράμπα"}
-            />
+          fontWeight: 'bold', fontSize: 23, paddingBottom: 15, color: 'white',
+        }}>Εισάγετε μία νέα ράμπα</Text>
+       
+
+        <MapView region={{
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+          latitudeDelta: 0.03,
+          longitudeDelta: 0.03
+        }} style={{ width: '100%', height: '40%', paddingBottom: 10 }} onPress={e => this.setState({ location: e.nativeEvent.coordinate })}>
+    {
+          <MapView.Marker
+            key="0"
+            coordinate={{
+              latitude: parseFloat(this.state.location['latitude']),
+              longitude: parseFloat(this.state.location["longitude"])
+            }}
+            title={"Η τοποθεσία μου"}
+            pinColor={"coral"}
+          />
           }
         </MapView>
 
+<ScrollView >
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 25, paddingLeft: 10
+            fontWeight: 'bold', fontSize: 20, height: 25, paddingLeft: 10, color: 'white'
           }}>Πόλη</Text>
+         
           <Picker
-            style={{ width: 300, }}
+            style={{ width: 300, color: 'lightgrey' }}
             selectedValue={this.state.City}
             onValueChange={(lang) => this.setState({ City: lang })}>
             <Picker.Item label="Αθήνα" value="Athens" />
@@ -88,10 +117,10 @@ export default class InsertRamp extends React.Component {
 
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1, paddingTop: 10 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 25, paddingLeft: 10
+            fontWeight: 'bold', fontSize: 20, height: 25, paddingLeft: 10, color: 'white'
           }}>Τύπος</Text>
           <Picker
-            style={{ width: 300 }}
+            style={{ width: 300, color: 'lightgrey' }}
             selectedValue={this.state.problem}
             onValueChange={(lang) => this.setState({ problem: lang })}>
             <Picker.Item label="Ράμπα" value="Ramp" />
@@ -100,7 +129,7 @@ export default class InsertRamp extends React.Component {
         </View>
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1, paddingTop: 10, width: '85%' }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 28, paddingLeft: 10
+            fontWeight: 'bold', fontSize: 20, height: 28, paddingLeft: 10, color: 'white'
           }}>Περιγραφή</Text>
           <View style={styles.textAreaContainer} >
 
@@ -108,7 +137,7 @@ export default class InsertRamp extends React.Component {
               style={styles.textArea}
               underlineColorAndroid="transparent"
               placeholder={"Type something"}
-              placeholderTextColor={"grey"}
+              placeholderTextColor={"lightgrey"}
               numberOfLines={4}
               multiline={true}
               onChangeText={(lang) => this.setState({ perigrafi: lang })}
@@ -122,14 +151,14 @@ export default class InsertRamp extends React.Component {
           zIndex: -1,
         }}>
           <Button
-            title={"Εισαγωγή Νέας Ράμπας"}
+            title={"Εισαγωγή"}
             onPress={() => { request.open('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/InsertRamps.php?typos=' + this.state.problem + '&perigrafi=' + this.state.perigrafi + '&long=' + this.state.markers["latitude"] + '&lat=' + this.state.markers["longitude"] + '&city=' + this.state.City); request.send(); }}
           />
-          {}
         </View>
-
+        </ScrollView>
 
       </ScrollView>
+
     );
   }
 

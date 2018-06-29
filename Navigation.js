@@ -66,10 +66,10 @@ componentWillMount(){
         }
 
         const origin1 = { latitude: 37.941004, longitude: 23.690345 };
-        const destination1 = { latitude: 37.941942, longitude: 23.688580 };
-        const destination2 = { latitude: 37.941542, longitude: 23.689371 };
-        const destination3 = { latitude: 37.22222, longitude: -122.2222222 };
-        const waypointsArray = [destination2, destination1];
+        const destination1 = { latitude: 37.941542, longitude: 23.689371 };
+        const destination2 = { latitude: 37.941942, longitude: 23.688580 };
+        const destination3 = { latitude: 37.942737, longitude: 23.689279 };
+        const waypointsArray = [destination2,destination3, destination1];
 
         latitude = JSON.stringify(this.state.location.latitude);
       longitude = JSON.stringify(this.state.location.longitude);
@@ -153,6 +153,7 @@ componentWillMount(){
             }}  pinColor={"green"} title={"Η τοποθεσία μου"}/>
                         <MapView.Marker coordinate={destination1}/>
                         <MapView.Marker coordinate={destination2} />
+                        <MapView.Marker coordinate={destination3} />
                         <MapView.Marker coordinate={{
                             latitude: parseFloat(this.state.markers["lat"]),
                             longitude: parseFloat(this.state.markers["lng"])
