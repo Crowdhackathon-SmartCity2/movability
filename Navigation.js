@@ -9,9 +9,9 @@ const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818
 const lat1 = '0';
 const long1 = '0';
 
-export default class InsertRamp extends React.Component {
+export default class Navigation extends React.Component {
     static navigationOptions = {
-        title: 'Νέα Ράμπα',
+        title: 'Πλοήγηση',
         headerStyle: {
             backgroundColor: '#3366ff',
         },
@@ -29,9 +29,30 @@ export default class InsertRamp extends React.Component {
                 lat: lat1,
                 lng: long1,
             },
+            location: {
+                latitude: 0,
+                longitude: 0
+              }
         }
 
     }
+
+componentWillMount(){
+    navigator.geolocation.clearWatch(this.watchId);
+}
+
+    componentDidMount() {
+        this.watchId = navigator.geolocation.watchPosition(
+          (position) => {
+            this.setState({
+              location: position.coords
+            });
+            console.log("lat + " + JSON.stringify(position.coords))
+          },
+          (error) => this.setState({ error: error.message }),
+          { enableHighAccuracy: true, distanceFilter: 1 },
+        );
+      }
 
     render() {
 
@@ -45,10 +66,13 @@ export default class InsertRamp extends React.Component {
         }
 
         const origin1 = { latitude: 37.941004, longitude: 23.690345 };
-        const destination1 = { latitude: 37.941542, longitude: 23.689371 };
-        const destination2 = { latitude: 37.941942, longitude: 23.688580 };
+        const destination1 = { latitude: 37.941942, longitude: 23.688580 };
+        const destination2 = { latitude: 37.941542, longitude: 23.689371 };
         const destination3 = { latitude: 37.22222, longitude: -122.2222222 };
         const waypointsArray = [destination2, destination1];
+
+        latitude = JSON.stringify(this.state.location.latitude);
+      longitude = JSON.stringify(this.state.location.longitude);
 
         return (
             <View style={{ backgroundColor: '#fff' }}>
@@ -107,8 +131,13 @@ export default class InsertRamp extends React.Component {
                     />
                 </View>
                 <View style={{ zIndex: 0 }}>
-                    <MapView style={{ width: '100%', height: '100%' }} >
-
+                    <MapView style={{ width: '100%', height: '100%' }} region={{
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05
+        }}>
+                    
                         {/*<MapView.Marker
                             key="1"
                             coordinate={{
@@ -118,15 +147,18 @@ export default class InsertRamp extends React.Component {
                             title={"Ράμπα"}
                         />*/}
                         <StatusBar hidden={true} />
-                        <MapView.Marker coordinate={origin1} />
-                        <MapView.Marker coordinate={destination1} />
+                        <MapView.Marker coordinate={{
+              latitude: parseFloat(this.state.location['latitude']),
+              longitude: parseFloat(this.state.location["longitude"])
+            }}  pinColor={"green"} title={"Η τοποθεσία μου"}/>
+                        <MapView.Marker coordinate={destination1}/>
                         <MapView.Marker coordinate={destination2} />
                         <MapView.Marker coordinate={{
                             latitude: parseFloat(this.state.markers["lat"]),
                             longitude: parseFloat(this.state.markers["lng"])
                         }} />
                         <MapViewDirections
-                            origin={origin1}
+                            origin={this.state.location}
                             waypoints={waypointsArray}
                             mode="walking"
                             destination={{
@@ -148,3 +180,5 @@ export default class InsertRamp extends React.Component {
 
 
 
+
+//export default GooglePlacesInput;
