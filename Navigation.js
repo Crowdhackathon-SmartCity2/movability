@@ -1,18 +1,17 @@
-import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { Button, FlatList } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StatusBar, Dimensions, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
-import { Marker } from 'react-native-maps';
-import { Constants, Location, Permissions } from 'expo';
 import MapViewDirections from 'react-native-maps-directions';
-import { StatusBar } from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
+const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } } };
+const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } } };
+const lat1 = '0';
+const long1 = '0';
 
-
-
-export default class Navigation extends React.Component {
+export default class InsertRamp extends React.Component {
     static navigationOptions = {
-        title: 'Ανακατεύθυνση',
+        title: 'Νέα Ράμπα',
         headerStyle: {
             backgroundColor: '#3366ff',
         },
@@ -22,10 +21,20 @@ export default class Navigation extends React.Component {
 
         },
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            state: '',
+            markers: {
+                lat: lat1,
+                lng: long1,
+            },
+        }
+
+    }
 
     render() {
-       
-       //KAINOYRGIO KLEIDI AIzaSyD0KipI5sQx8GgqClUgI7yaI8YWNKZRpew
+
         const GOOGLE_MAPS_APIKEY = ' AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY';
 
         const initialRegion = {
@@ -35,27 +44,107 @@ export default class Navigation extends React.Component {
             longitudeDelta: 0.0421,
         }
 
-        const origin1 = { latitude: 37.3318456, longitude: -122.0296002 };
-        const destination1 = { latitude: 37.771707, longitude: -122.4053769 };
-        const destination2 = { latitude: 37.77222, longitude: -122.2222222 };
+        const origin1 = { latitude: 37.941004, longitude: 23.690345 };
+        const destination1 = { latitude: 37.941542, longitude: 23.689371 };
+        const destination2 = { latitude: 37.941942, longitude: 23.688580 };
         const destination3 = { latitude: 37.22222, longitude: -122.2222222 };
         const waypointsArray = [destination2, destination1];
+
         return (
-            <MapView initialRegion={initialRegion} style={StyleSheet.absoluteFillObject}>
-                <StatusBar hidden={true} />
-                <MapView.Marker coordinate={origin1} />
-                <MapView.Marker coordinate={destination1} />
-                <MapView.Marker coordinate={destination2} />
-                <MapView.Marker coordinate={destination3} />
-                <MapViewDirections
-                    origin={origin1}
-                    waypoints={waypointsArray}
-                    destination={destination3}
-                    apikey={GOOGLE_MAPS_APIKEY}
-                    strokeWidth={3}
-                    strokeColor="hotpink"
-                />
-            </MapView>
+            <View style={{ backgroundColor: '#fff' }}>
+                <View style={{ position: 'absolute', zIndex: 1, backgroundColor: '#fff', width: '100%' }}>
+                    <GooglePlacesAutocomplete
+                        placeholder='Search'
+                        minLength={1}
+                        autoFocus={false}
+                        returnKeyType={'search'}
+                        listViewDisplayed='auto'
+                        fetchDetails={true}
+                        renderDescription={row => row.description}
+                        onPress={(data, details = null) => {
+                            //console.log(details.geometry.location);//Επιστροφή συντεταγμενων
+                            this.setState({ markers: details.geometry.location })
+                        }}
+
+                        getDefaultValue={() => ''}
+
+                        query={{
+                            // available options: https://developers.google.com/places/web-service/autocomplete
+                            key: 'AIzaSyD0KipI5sQx8GgqClUgI7yaI8YWNKZRpew',
+                            language: 'gr', // language of the results
+                            types: 'address' // Εδω πρέπει να μπει το address
+                        }}
+
+                        styles={{
+                            textInputContainer: {
+                                width: '100%'
+                            },
+                            description: {
+                                fontWeight: 'bold',
+                                zIndex: 2
+                            },
+                            predefinedPlacesDescription: {
+                                color: '#1faadb'
+                            }
+                        }}
+
+                        //currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                        //currentLocationLabel="Current location"
+                        //nearbyPlacesAPI='GoogleReverseGeocoding' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+                        GoogleReverseGeocodingQuery={{
+                            // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+                        }}
+                        GooglePlacesSearchQuery={{
+                            // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+                            rankby: 'distance',
+                            types: 'food'
+                        }}
+
+                        filterReverseGeocodingByTypes={['locality']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+                        // predefinedPlaces={[homePlace, workPlace]}
+
+                        debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+                    />
+                </View>
+                <View style={{ zIndex: 0 }}>
+                    <MapView style={{ width: '100%', height: '100%' }} >
+
+                        {/*<MapView.Marker
+                            key="1"
+                            coordinate={{
+                                latitude: parseFloat(this.state.markers["lat"]),
+                                longitude: parseFloat(this.state.markers["lng"])
+                            }}
+                            title={"Ράμπα"}
+                        />*/}
+                        <StatusBar hidden={true} />
+                        <MapView.Marker coordinate={origin1} />
+                        <MapView.Marker coordinate={destination1} />
+                        <MapView.Marker coordinate={destination2} />
+                        <MapView.Marker coordinate={{
+                            latitude: parseFloat(this.state.markers["lat"]),
+                            longitude: parseFloat(this.state.markers["lng"])
+                        }} />
+                        <MapViewDirections
+                            origin={origin1}
+                            waypoints={waypointsArray}
+                            mode="walking"
+                            destination={{
+                                latitude: parseFloat(this.state.markers["lat"]),
+                                longitude: parseFloat(this.state.markers["lng"])
+                            }}
+                            apikey={GOOGLE_MAPS_APIKEY}
+                            strokeWidth={3}
+                            strokeColor="red"
+                        />
+                        {console.log(this.state.markers)}
+                    </MapView>
+                </View>
+            </View>
         );
     }
+
 }
+
+
+
