@@ -43,7 +43,7 @@ export default class Report extends React.Component {
 
   render() {
 
-
+    var request = new XMLHttpRequest();
     return (
       <View style={styles.MainContainer} >
 
@@ -60,10 +60,10 @@ export default class Report extends React.Component {
             style={{ width: 300, }}
             selectedValue={this.state.city}
             onValueChange={(lang) => this.setState({ city: lang })}>
-            <Picker.Item label="Αθήνα" value="Athens" />
-            <Picker.Item label="Θεσσαλονίκη" value="Thessaloniki" />
-            <Picker.Item label="Σάμος" value="Samos" />
-            <Picker.Item label="Κιλκίς" value="Kilkis" />
+            <Picker.Item label="Αθήνα" value="Αθήνα" />
+            <Picker.Item label="Θεσσαλονίκη" value="Θεσσαλονίκη" />
+            <Picker.Item label="Σάμος" value="Σάμος" />
+            <Picker.Item label="Κιλκίς" value="Κιλκίς" />
           </Picker>
         </View>
 
@@ -75,9 +75,9 @@ export default class Report extends React.Component {
             style={{ width: 300 }}
             selectedValue={this.state.problem}
             onValueChange={(lang) => this.setState({ problem: lang })}>
-            <Picker.Item label="Παρκαρισμένο Αυτοκίνητο" value="Parking" />
-            <Picker.Item label="Δύσκολη Πρόσβαση" value="Hard" />
-            <Picker.Item label="Ανύπαρκτη Ράμπα" value="None" />
+            <Picker.Item label="Παρκαρισμένο Αυτοκίνητο" value="Παρκαρισμένο Αυτοκίνητο" />
+            <Picker.Item label="Δύσκολη Πρόσβαση" value="Δύσκολη Πρόσβαση" />
+            <Picker.Item label="Ανύπαρκτη Ράμπα" value="Ανύπαρκτη Ράμπα" />
           </Picker>
         </View>
 
@@ -91,7 +91,7 @@ export default class Report extends React.Component {
         }}>
           <Button
             title="Αποστολή"
-            onPress={() => { console.log('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/InsertRamps.php?City=' + this.state.city + '&Problem=' + this.state.problem + '&id=' + this.state.id)}}
+            onPress={() => { request.open('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/Report.php?City=' + this.state.city + '&Problem=' + this.state.problem + '&id=' + this.state.id); request.send();}}
           />
 
         </View>
@@ -119,13 +119,6 @@ const styles = StyleSheet.create(
         alignItems: 'center',
       }
   });
-
-
-
-
-
-
-
 
 
 const styles1 = StyleSheet.create({
