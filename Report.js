@@ -28,7 +28,7 @@ export default class Report extends React.Component {
       city: '',
       problem: '',
       id: 'r1'
-
+ 
     }
   }
  
@@ -54,10 +54,10 @@ export default class Report extends React.Component {
  
  <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10
+            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10 ,color: 'white'
           }}>Πόλη</Text>
           <Picker
-            style={{ width: 300, }}
+            style={{ width: 300,color: 'white' }}
             selectedValue={this.state.city}
             onValueChange={(lang) => this.setState({ city: lang })}>
             <Picker.Item label="Αθήνα" value="Αθήνα" />
@@ -66,13 +66,13 @@ export default class Report extends React.Component {
             <Picker.Item label="Κιλκίς" value="Κιλκίς" />
           </Picker>
         </View>
-
+ 
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1, paddingTop: 10 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10
+            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10,color: 'white',
           }}>Πρόβλημα</Text>
           <Picker
-            style={{ width: 300 }}
+            style={{ width: 300,color: 'white' }}
             selectedValue={this.state.problem}
             onValueChange={(lang) => this.setState({ problem: lang })}>
             <Picker.Item label="Παρκαρισμένο Αυτοκίνητο" value="Παρκαρισμένο Αυτοκίνητο" />
