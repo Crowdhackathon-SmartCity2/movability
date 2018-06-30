@@ -43,7 +43,7 @@ export default class Report extends React.Component {
  
   render() {
  
- 
+    var request = new XMLHttpRequest();
     return (
       //style={{ alignItems: 'center', backgroundColor: 'whitesmoke', height: 700, paddingTop:  20 }}
       <View style={styles.MainContainer} >
