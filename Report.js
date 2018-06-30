@@ -5,8 +5,8 @@ import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
 import { createBottomTabNavigator } from 'react-navigation';
-
-
+ 
+ 
 export default class Report extends React.Component {
  
   static navigationOptions = {
@@ -19,20 +19,20 @@ export default class Report extends React.Component {
       alignSelf: "center",
     },
   };
-
+ 
   constructor(props) {
     super(props);
     this.state = {
       state: '',
       isVisible: true,
+      city: '',
+      problem: '',
+      id: 'r1'
+
     }
-    this.problem =
-      {
-        problem: ''
-      }
   }
-
-
+ 
+ 
   static navigationOptions = {
     headerStyle: {
       backgroundColor: "#16a085",
@@ -40,50 +40,50 @@ export default class Report extends React.Component {
     },
     header: null
   };
-
+ 
   render() {
-
-
+ 
+ 
     return (
       //style={{ alignItems: 'center', backgroundColor: 'whitesmoke', height: 700, paddingTop:  20 }}
       <View style={styles.MainContainer} >
-
+ 
         <Text style={{
           fontWeight: 'bold', fontSize: 23, paddingBottom: 30, paddingTop: 20, color: 'white',
         }}>Αναφέρετε κάποιο πρόβλημα</Text>
-
-        <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1 }}>
+ 
+ <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10,color: 'white'
+            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10
           }}>Πόλη</Text>
           <Picker
-            style={{ width: 300, color: 'white'}}
-            selectedValue={this.state.language}
-            onValueChange={(lang) => this.setState({ language: lang })}>
-            <Picker.Item label="Αθήνα" value="Athens" />
-            <Picker.Item label="Θεσσαλονίκη" value="Thessaloniki" />
-            <Picker.Item label="Σάμος" value="Samos" />
-            <Picker.Item label="Κιλκίς" value="Kilkis" />
+            style={{ width: 300, }}
+            selectedValue={this.state.city}
+            onValueChange={(lang) => this.setState({ city: lang })}>
+            <Picker.Item label="Αθήνα" value="Αθήνα" />
+            <Picker.Item label="Θεσσαλονίκη" value="Θεσσαλονίκη" />
+            <Picker.Item label="Σάμος" value="Σάμος" />
+            <Picker.Item label="Κιλκίς" value="Κιλκίς" />
           </Picker>
         </View>
 
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1, paddingTop: 10 }}>
           <Text style={{
-            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10, color: 'white'
+            fontWeight: 'bold', fontSize: 20, height: 30, paddingLeft: 10
           }}>Πρόβλημα</Text>
           <Picker
-            style={{ width: 300 , color: 'lightgrey'}}
-            selectedValue={this.problem.language}
-            onValueChange={(lang) => this.setState({ language: lang })}>
-            <Picker.Item label="Παρκαρισμένο Αυτοκίνητο" value="Parking" />
-            <Picker.Item label="Δύσκολη Πρόσβαση" value="Hard" />
-            <Picker.Item label="Ανύπαρκτη Ράμπα" value="None" />
+            style={{ width: 300 }}
+            selectedValue={this.state.problem}
+            onValueChange={(lang) => this.setState({ problem: lang })}>
+            <Picker.Item label="Παρκαρισμένο Αυτοκίνητο" value="Παρκαρισμένο Αυτοκίνητο" />
+            <Picker.Item label="Δύσκολη Πρόσβαση" value="Δύσκολη Πρόσβαση" />
+            <Picker.Item label="Ανύπαρκτη Ράμπα" value="Ανύπαρκτη Ράμπα" />
           </Picker>
         </View>
-
-
-
-
+ 
+ 
+ 
+ 
         <StatusBar hidden={true} />
         <View style={{
           paddingTop: 40,
@@ -91,15 +91,22 @@ export default class Report extends React.Component {
         }}>
           <Button
             title="Υποβολή"
-            onPress={() => this.props.navigation.navigate('Navigation')}
+            onPress={() => { request.open('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/Report.php?City=' + this.state.city + '&Problem=' + this.state.problem + '&id=' + this.state.id); request.send(); Alert.alert(
+              'Επιτυχής Υποβολή',
+              'Η υποβολή του προβλήματός σας έχει αποσταλεί με επιτυχία.',
+              [
+                {text: 'OK', onPress: this.onDeleteBTN},
+              ],
+              { cancelable: false }
+            ) }}
           />
-
+ 
         </View>
        
       </View>
     );
   }
-
+ 
 }
 const styles = StyleSheet.create(
   {
@@ -120,15 +127,8 @@ const styles = StyleSheet.create(
         backgroundColor: '#004d99'
       }
   });
-
-
-
-
-
-
-
-
-
+ 
+ 
 const styles1 = StyleSheet.create({
   container: {
     flex: 1,

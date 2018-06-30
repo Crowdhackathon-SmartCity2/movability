@@ -1,11 +1,11 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, StatusBar } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, StatusBar, Alert } from 'react-native';
 import { Button, FlatList, ScrollView, Picker } from 'react-native';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
-
-
+ 
+ 
 export default class InsertRamp extends React.Component {
   static navigationOptions = {
     title: 'Νέα Ράμπα',
@@ -15,7 +15,7 @@ export default class InsertRamp extends React.Component {
     headerTintColor: '#fff',
     headerTitleStyle: {
       fontWeight: 'bold',
-
+ 
     },
   };
   constructor(props) {
@@ -38,10 +38,10 @@ export default class InsertRamp extends React.Component {
     this.problem =
       {
       }
-
+ 
   }
  
-
+ 
   componentDidMount() {
     this.watchId = navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -54,23 +54,23 @@ export default class InsertRamp extends React.Component {
       { enableHighAccuracy: true},
     );
   }
-
+ 
   render() {
-
+ 
     //KAINOYRGIO KLEIDI AIzaSyD0KipI5sQx8GgqClUgI7yaI8YWNKZRpew
     const GOOGLE_MAPS_APIKEY = ' AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY';
-
+ 
     const initialRegion = {
       latitude: 37.3318456,
       longitude: -122.0296002,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     }
-
+ 
     latitude = JSON.stringify(this.state.location.latitude);
     longitude = JSON.stringify(this.state.location.longitude);
-    
-
+   
+ 
     var request = new XMLHttpRequest();
     return (
       <ScrollView  contentContainerStyle={{ alignItems: 'center', flex: 1, paddingTop: 10, backgroundColor: '#004d99', width: '100%' }}>
@@ -78,7 +78,7 @@ export default class InsertRamp extends React.Component {
           fontWeight: 'bold', fontSize: 23, paddingBottom: 15, color: 'white',
         }}>Εισάγετε μία νέα ράμπα</Text>
        
-
+ 
         <MapView region={{
           latitude: parseFloat(latitude),
           longitude: parseFloat(longitude),
@@ -97,7 +97,7 @@ export default class InsertRamp extends React.Component {
           />
           }
         </MapView>
-
+ 
 <ScrollView >
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1 }}>
           <Text style={{
@@ -114,7 +114,7 @@ export default class InsertRamp extends React.Component {
             <Picker.Item label="Κιλκίς" value="Kilkis" />
           </Picker>
         </View>
-
+ 
         <View style={{ borderBottomColor: '#bbb', borderBottomWidth: 1, paddingTop: 10 }}>
           <Text style={{
             fontWeight: 'bold', fontSize: 20, height: 25, paddingLeft: 10, color: 'white'
@@ -132,7 +132,7 @@ export default class InsertRamp extends React.Component {
             fontWeight: 'bold', fontSize: 20, height: 28, paddingLeft: 10, color: 'white'
           }}>Περιγραφή</Text>
           <View style={styles.textAreaContainer} >
-
+ 
             <TextInput
               style={styles.textArea}
               underlineColorAndroid="transparent"
@@ -152,18 +152,25 @@ export default class InsertRamp extends React.Component {
         }}>
           <Button
             title={"Εισαγωγή"}
-            onPress={() => { request.open('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/InsertRamps.php?typos=' + this.state.problem + '&perigrafi=' + this.state.perigrafi + '&long=' + this.state.markers["latitude"] + '&lat=' + this.state.markers["longitude"] + '&city=' + this.state.City); request.send(); }}
+            onPress={() => { request.open('GET', 'https://zogasmybio.000webhostapp.com/ReactAPI/InsertRamps.php?typos=' + this.state.problem + '&perigrafi=' + this.state.perigrafi + '&long=' + this.state.markers["latitude"] + '&lat=' + this.state.markers["longitude"] + '&city=' + this.state.City); request.send(); Alert.alert(
+              'Επιτυχής Υποβολή',
+              'Η υποβολή της ράμπας έχει γίνει με επιτυχία.',
+              [
+                {text: 'OK', onPress: this.onDeleteBTN},
+              ],
+              { cancelable: false }
+            ) }}
           />
         </View>
         </ScrollView>
-
+ 
       </ScrollView>
-
+ 
     );
   }
-
+ 
 }
-
+ 
 const styles = StyleSheet.create(
   {
     textAreaContainer: {
@@ -175,4 +182,4 @@ const styles = StyleSheet.create(
       height: 70,
       justifyContent: "flex-start"
     }
-  });
+});
