@@ -29,6 +29,7 @@ export default class Navigation extends React.Component {
                 lat: lat1,
                 lng: long1,
             },
+            quarter1: [],
             location: {
                 latitude: 0,
                 longitude: 0
@@ -47,7 +48,7 @@ export default class Navigation extends React.Component {
                 this.setState({
                     location: position.coords
                 });
-                console.log("lat + " + JSON.stringify(position.coords))
+               // console.log("lat + " + JSON.stringify(position.coords))
             },
             (error) => this.setState({ error: error.message }),
             { enableHighAccuracy: true, distanceFilter: 1 },
@@ -81,7 +82,8 @@ export default class Navigation extends React.Component {
         var q1dest5 = {latitude: 0, longitude: 0};
         var q1dest6 = {latitude: 0, longitude: 0};
         var q1dest7 = {latitude: 0, longitude: 0};
-        var quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];;
+        var qt= [];
+        //var quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];
  
 
  
@@ -107,14 +109,17 @@ export default class Navigation extends React.Component {
                             this.setState({ markers: details.geometry.location });
  
                             if (parseFloat(this.state.markers["lat"]) >= parseFloat(this.state.location['latitude']) && parseFloat(this.state.markers["lng"]) >= parseFloat(this.state.location["longitude"])) {
-                                 q1dest1 = {latitude: 37.942029, longitude: 23.695786};
-                                 q1dest2 = {latitude: 37.942088, longitude: 23.695864 };
+                                 q1dest1 = {latitude: 37.942633, longitude: 23.694878};
+                                 q1dest2 = {latitude: 37.942673, longitude: 23.694960 };
                                  q1dest3 = {latitude: 37.943108, longitude: 23.695623};
                                  q1dest4 = {latitude: 37.943176, longitude: 23.695687};
                                  q1dest5 = {latitude: 37.943293, longitude: 23.697441};
                                  q1dest6 = {latitude: 37.943179, longitude: 23.697594};
                                  q1dest7 = {latitude: 37.943242, longitude: 23.697658};
-                                 quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];
+
+                                 qt = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7]
+                                 this.setState({ quarter1: qt })
+                                
                                 console.log("pano deksia");
                             }
                             else if (parseFloat(this.state.markers["lat"]) > parseFloat(this.state.location['latitude']) && parseFloat(this.state.markers["lng"]) < parseFloat(this.state.location["longitude"])) {
@@ -125,34 +130,38 @@ export default class Navigation extends React.Component {
                                  q1dest5 = {latitude: 37.943856, longitude: 23.688541};
                                  q1dest6 = {latitude: 37.944254, longitude: 23.688879};
                                  q1dest7 = {latitude: 37.944318, longitude: 23.688943};
-                                 quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];
-                                 console.log(quarter1);
+
+                                 qt = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7]
+                                 this.setState({ quarter1: qt })
+                                 //console.log(quarter1);
                                 console.log("pano aristera");
                             }
                             else if (parseFloat(this.state.markers["lat"]) < parseFloat(this.state.location['latitude']) && parseFloat(this.state.markers["lng"]) <= parseFloat(this.state.location["longitude"])) {
-                                 q1dest1 = {latitude: 37.939456, longitude: 23.696262};
-                                 q1dest2 = {latitude: 37.939388, longitude:  23.696340};
-                                 q1dest3 = {latitude: 37.93881, longitude: 23.696994};
-                                 q1dest4 = {latitude: 37.938747, longitude: 23.697058};
-                                 q1dest5 = {latitude: 37.937630, longitude: 23.695636};
-                                 q1dest6 = {latitude: 37.937562, longitude: 23.695545};
-                                 q1dest7 = {latitude: 37.937499, longitude: 23.695722};
-                                 quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];
+                                q1dest1 = {latitude: 37.942029, longitude: 23.695786};
+                                q1dest2 = {latitude: 37.942088, longitude: 23.695864 };
+                                q1dest3 = {latitude: 37.943108, longitude: 23.695623};
+                                q1dest4 = {latitude: 37.943176, longitude: 23.695687};
+                                q1dest5 = {latitude: 37.943293, longitude: 23.697441};
+                                q1dest6 = {latitude: 37.943179, longitude: 23.697594};
+                                q1dest7 = {latitude: 37.943242, longitude: 23.697658};
+
+                                 qt = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7]
+                                 this.setState({ quarter1: qt })
                                 console.log("kato aristera");
                             }
                             else if (parseFloat(this.state.markers["lat"]) < parseFloat(this.state.location['latitude']) && parseFloat(this.state.markers["lng"]) > parseFloat(this.state.location["longitude"])) {
-                                 q1dest1 = {latitude: 37.942815, longitude: 23.689308};
-                                 q1dest2 = {latitude: 37.942914, longitude:  23.689136};
-                                 q1dest3 = {latitude: 37.943428, longitude: 23.688181};
-                                 q1dest4 = {latitude: 37.943807, longitude: 23.688498};
-                                 q1dest5 = {latitude: 37.943856, longitude: 23.688541};
-                                 q1dest6 = {latitude: 37.944254, longitude: 23.688879};
-                                 q1dest7 = {latitude: 37.944318, longitude: 23.688943};
-                                 quarter1 = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7];
+                                q1dest1 = {latitude: 37.939456, longitude: 23.696262};
+                                q1dest2 = {latitude: 37.939388, longitude:  23.696340};
+                                q1dest3 = {latitude: 37.93881, longitude: 23.696994};
+                                q1dest4 = {latitude: 37.938747, longitude: 23.697058};
+                                q1dest5 = {latitude: 37.937630, longitude: 23.695636};
+                                q1dest6 = {latitude: 37.937562, longitude: 23.695545};
+                                q1dest7 = {latitude: 37.937499, longitude: 23.695722};
+
+                                 qt = [q1dest1,q1dest2,q1dest3,q1dest4,q1dest5,q1dest6,q1dest7]
+                                 this.setState({ quarter1: qt })
                                 console.log("kato deksia");
                             }
-                            else
-                            console.log("gamta");
                         }}
  
                         getDefaultValue={() => ''}
@@ -179,7 +188,7 @@ export default class Navigation extends React.Component {
  
                         //currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
                         //currentLocationLabel="Current location"
-                        //nearbyPlacesAPI='GoogleReverseGeocoding' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+                        nearbyPlacesAPI='GoogleReverseGeocoding' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
                         GoogleReverseGeocodingQuery={{
                             // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
                         }}
@@ -216,6 +225,11 @@ export default class Navigation extends React.Component {
                             latitude: parseFloat(this.state.location['latitude']),
                             longitude: parseFloat(this.state.location["longitude"])
                         }} pinColor={"green"} title={"Η τοποθεσία μου"} />
+
+                        {this.state.quarter1.map((marker,index) => (
+                        <MapView.Marker key={index} coordinate={{latitude: marker.latitude,longitude: marker.longitude}} />
+                    ))}
+                    {/*
                         <MapView.Marker coordinate={q1dest1} />
                         <MapView.Marker coordinate={q1dest2} />
                         <MapView.Marker coordinate={q1dest3} />
@@ -223,13 +237,15 @@ export default class Navigation extends React.Component {
                         <MapView.Marker coordinate={q1dest5} />
                         <MapView.Marker coordinate={q1dest6} />
                         <MapView.Marker coordinate={q1dest7} />
+                        */
+                    }
                         <MapView.Marker coordinate={{
                             latitude: parseFloat(this.state.markers["lat"]),
                             longitude: parseFloat(this.state.markers["lng"])
                         }} />
                         <MapViewDirections
                             origin={this.state.location}
-                            waypoints={quarter1}
+                            waypoints={this.state.quarter1}
                             mode="walking"
                             destination={{
                                 latitude: parseFloat(this.state.markers["lat"]),
@@ -239,7 +255,8 @@ export default class Navigation extends React.Component {
                             strokeWidth={5}
                             strokeColor="red"
                         />
-                        {console.log(this.state.markers)}
+                        {console.log(this.state.quarter1)}
+                        
                     </MapView>
                 </View>
             </View>
