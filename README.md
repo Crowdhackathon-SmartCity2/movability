@@ -41,36 +41,12 @@ npm start
 
 # Τι κάνει η εφαρμογή;
 Η εφαρμογή περιέχει 6 κύριες οθόνες (Την οθόνη καλωσορίσματος, την οθόνη προβολής ραμπών πάνω στον χάρτη, την οθόνη αναφοράς ραμπας που έχει πρόβλημα ο χρήστης, την Πλοήγηση, την κατάταξη των πόλεων και την εισαγωγή νέας ράμπας) όπως απεικονίζονται παρακάτω
-### Oθόνες Kαλωσορίσματος
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/1.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/1.jpg)
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/2.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/2.jpg)
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/3.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/3.jpg)
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/4.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/4.jpg)
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/5.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/5.jpg)
-
-### Οθόνη προβολής ραμπών πάνω στον χάρτη
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/6.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/6.jpg)
-
-### Οθόνη αναφοράς ραμπας που έχει πρόβλημα ο χρήστης
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/7.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/7.jpg)
-
-### Πλοήγηση
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/12.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/12.jpg)
-
-### Κατάταξη των πόλεων και την εισαγωγή νέας ράμπας
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/13.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/13.jpg)
-
-### Εισαγωγή νέας ράμπας
-
-[![N|Solid](http://zogasmybio.000webhostapp.com/Screenshots/14.jpg)](http://zogasmybio.000webhostapp.com/Screenshots/14.jpg)
+ - Oθόνες Kαλωσορίσματος
+ - Οθόνη προβολής ραμπών πάνω στον χάρτη
+ - Οθόνη αναφοράς ραμπας που έχει πρόβλημα ο χρήστης
+ - Πλοήγηση
+ - Κατάταξη των πόλεων και την εισαγωγή νέας ράμπας
+ - Εισαγωγή νέας ράμπας
 
 # Μπορεί κάποιος να χρησιμοποιήσει τον κώδικα;
 Φυσικά! Η εφαρμογή μπορεί να έχει μερικά προβλήματα τα οποία μπορεί κάποιος να θέλει να τα λύσει ή να χρησιμοποιήσει τον κώδικα για την ανάπτυξη ενος νέου project με επιπλέον δυνατότητες
@@ -81,3 +57,14 @@ npm start
 - Εμφάνιση εναλακτικών διαδρομών
 - Λήψη φωτογραφία κατα την αναφορά
 - Αναφορά συγκεκριμένης Ράμπας έπειτα απο επιλογή στον χάρτη
+
+# Γνώσεις που αποκτήθηκαν 
+  - Άριστη χρήση των HTML5,JavaScript,JQuery,css,Bootstrap **για το forntend**
+  - Η σχεδίαση και η δημιουργία μιας **ΜΗ** σχεσιακής βάσης δεδομένων σε XML που θα καλύπτει όλες τις λειτουργικές και μή λειτουργικές απαιτήσεις του συστήματος και η διαχείρησή της μέσω PHP
+  - Η χρήση React Native **για το APP**
+  - Η Άριστη χρήση του Google Maps API **για το APP και το WebPage**
+  
+# Co-Creators
+  -[Γεώργιος Ζώγας](https://github.com/gzogas)
+  
+  -[Κωνσταντίνος Καλύβας](https://www.linkedin.com/in/konstantinos-kalivas-45552018a/)
