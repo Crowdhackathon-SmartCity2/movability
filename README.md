@@ -1,4 +1,4 @@
-[![N|Solid](https://zogasmybio.000webhostapp.com/Movability/sLogo.png)](https://zogasmybio.000webhostapp.com/Movability/)
+# Movability
 
 Το movability είναι μία εφαρμογή που δημιουργηθηκε για τη διευκόλυση της μετακίνησης των πολιτών με κινητικές δυσκολίες όπως:
   - ΑμεΑ
