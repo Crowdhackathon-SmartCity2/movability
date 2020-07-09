@@ -1,5 +1,5 @@
 # Movability
-GR:
+# GR:
 ##### Δημιουργηθηκε το 2019
 Το movability είναι μία εφαρμογή που δημιουργηθηκε για τη διευκόλυση της μετακίνησης των πολιτών με κινητικές δυσκολίες όπως:
   - ΑμεΑ
@@ -33,7 +33,8 @@ GR:
   - Η χρήση React Native **για το APP**
   - Η Άριστη χρήση του Google Maps API **για το APP και το WebPage**
   
-ENG:
+ 
+# ENG:
 ##### Created in 2019
 Movability is an application created to facilitate the movement of citizens with mobility difficulties such as:
   - Disabled
