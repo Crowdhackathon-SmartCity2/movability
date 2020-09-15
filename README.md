@@ -70,7 +70,7 @@ Of course! The application may have some problems that one may want to solve or 
   - Use React Native **for APP**
   - Excellent use of Google Maps API **for APP and WebPage**
   
-# Co-Creators
+# Co-Creators 
   -[Γεώργιος Ζώγας](https://github.com/gzogas)
   
   -[Κωνσταντίνος Καλύβας](https://www.linkedin.com/in/konstantinos-kalivas-45552018a/)
